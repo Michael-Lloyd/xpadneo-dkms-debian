@@ -34,7 +34,7 @@ echo "Cleaning previous build..."
 debian/rules clean
 
 echo "Building package..."
-dpkg-buildpackage -us -uc -sa
+dpkg-buildpackage -sa
 
 cd ..
 echo ""
