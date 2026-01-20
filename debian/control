@@ -3,7 +3,7 @@ Section: kernel
 Priority: optional
 Maintainer: Michael Lloyd <michael@micl.dev>
 Build-Depends: debhelper-compat (= 13), dh-dkms
-Standards-Version: 4.6.2
+Standards-Version: 4.7.3
 Homepage: https://github.com/atar-axis/xpadneo
 Vcs-Browser: https://github.com/Michael-Lloyd/xpadneo-dkms-debian
 Vcs-Git: https://github.com/Michael-Lloyd/xpadneo-dkms-debian.git
