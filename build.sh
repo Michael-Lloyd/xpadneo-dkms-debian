@@ -4,41 +4,39 @@ set -e
 UPSTREAM_VERSION="0.9.8"
 UPSTREAM_REPO="https://github.com/atar-axis/xpadneo.git"
 UPSTREAM_TAG="v${UPSTREAM_VERSION}"
+PACKAGE_NAME="xpadneo-dkms"
+BUILD_DIR="../xpadneo-${UPSTREAM_VERSION}"
 
-echo "Building xpadneo-dkms package..."
+echo "Building ${PACKAGE_NAME} package..."
 echo "Upstream version: ${UPSTREAM_VERSION}"
 
-# Clone upstream source if not present
-if [ ! -d "xpadneo" ]; then
-    echo "Cloning upstream repository..."
-    git clone "${UPSTREAM_REPO}" xpadneo
+# Download orig.tar.gz if not present
+if [ ! -f "../${PACKAGE_NAME}_${UPSTREAM_VERSION}.orig.tar.gz" ]; then
+    echo "Downloading upstream source tarball..."
+    wget -O "../${PACKAGE_NAME}_${UPSTREAM_VERSION}.orig.tar.gz" \
+        "https://github.com/atar-axis/xpadneo/archive/refs/tags/${UPSTREAM_TAG}.tar.gz"
 fi
 
-cd xpadneo
-
-# Fetch latest tags
-echo "Fetching upstream tags..."
-git fetch --tags
-
-# Checkout specific version
-echo "Checking out ${UPSTREAM_TAG}..."
-git checkout "${UPSTREAM_TAG}"
+# Extract source if not present
+if [ ! -d "${BUILD_DIR}" ]; then
+    echo "Extracting upstream source..."
+    tar -xzf "../${PACKAGE_NAME}_${UPSTREAM_VERSION}.orig.tar.gz" -C ..
+fi
 
 # Copy debian packaging files
 echo "Copying debian/ directory..."
-rm -rf debian
-cp -r ../debian .
+rm -rf "${BUILD_DIR}/debian"
+cp -r debian "${BUILD_DIR}/"
 
-# Clean previous build
+# Build package
+cd "${BUILD_DIR}"
 echo "Cleaning previous build..."
 debian/rules clean
 
-# Build package
 echo "Building package..."
-dpkg-buildpackage -us -uc -b
+dpkg-buildpackage -us -uc -sa
 
-# Move build artifacts to parent directory
 cd ..
 echo ""
 echo "Build complete! Packages are in: $(pwd)"
-ls -lh xpadneo-dkms_*.deb xpadneo-dkms_*.buildinfo xpadneo-dkms_*.changes 2>/dev/null || true
+ls -lh ${PACKAGE_NAME}_*.deb ${PACKAGE_NAME}_*.dsc ${PACKAGE_NAME}_*.changes 2>/dev/null || true
