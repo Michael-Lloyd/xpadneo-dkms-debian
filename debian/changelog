@@ -1,0 +1,6 @@
+xpadneo-dkms (0.9.8-1) unstable; urgency=medium
+
+  * Initial Debian release (Closes: #1125989)
+  * Package upstream version 0.9.8
+
+ -- Michael Lloyd <michael@micl.dev>  Tue, 20 Jan 2026 15:10:06 +1100

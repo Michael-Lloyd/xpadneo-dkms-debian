@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+PACKAGE_NAME=hid-xpadneo
+PACKAGE_VERSION=@VERSION@
+
+case "$1" in
+	configure)
+		if [ -f /usr/src/${PACKAGE_NAME}-${PACKAGE_VERSION}/dkms.conf ]; then
+			dkms add -m ${PACKAGE_NAME} -v ${PACKAGE_VERSION} --rpm_safe_upgrade || true
+			if [ -x /usr/lib/dkms/dkms_autoinstaller ]; then
+				/usr/lib/dkms/dkms_autoinstaller start || true
+			fi
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+#DEBHELPER#
+
+exit 0

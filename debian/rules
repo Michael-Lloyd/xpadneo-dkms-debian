@@ -1,0 +1,39 @@
+#!/usr/bin/make -f
+
+VERSION := $(shell dpkg-parsechangelog -S version | cut -d- -f1)
+
+%:
+	dh $@ --with dkms
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	install -d debian/xpadneo-dkms/usr/src/hid-xpadneo-$(VERSION)
+	cp -r hid-xpadneo/src debian/xpadneo-dkms/usr/src/hid-xpadneo-$(VERSION)/
+	cp hid-xpadneo/Makefile debian/xpadneo-dkms/usr/src/hid-xpadneo-$(VERSION)/
+	sed 's/@DO_NOT_CHANGE@/$(VERSION)/g' hid-xpadneo/dkms.conf.in \
+		> debian/xpadneo-dkms/usr/src/hid-xpadneo-$(VERSION)/dkms.conf
+	install -m 755 hid-xpadneo/dkms.post_install \
+		debian/xpadneo-dkms/usr/src/hid-xpadneo-$(VERSION)/
+	install -m 755 hid-xpadneo/dkms.post_remove \
+		debian/xpadneo-dkms/usr/src/hid-xpadneo-$(VERSION)/
+	install -d debian/xpadneo-dkms/usr/lib/modprobe.d
+	install -m 644 hid-xpadneo/etc-modprobe.d/xpadneo.conf \
+		debian/xpadneo-dkms/usr/lib/modprobe.d/
+	install -d debian/xpadneo-dkms/usr/lib/udev/rules.d
+	install -m 644 hid-xpadneo/etc-udev-rules.d/*.rules \
+		debian/xpadneo-dkms/usr/lib/udev/rules.d/
+
+override_dh_installdeb:
+	sed 's/@VERSION@/$(VERSION)/g' debian/xpadneo-dkms.preinst.in > debian/xpadneo-dkms.preinst
+	sed 's/@VERSION@/$(VERSION)/g' debian/xpadneo-dkms.postinst.in > debian/xpadneo-dkms.postinst
+	sed 's/@VERSION@/$(VERSION)/g' debian/xpadneo-dkms.prerm.in > debian/xpadneo-dkms.prerm
+	sed 's/@VERSION@/$(VERSION)/g' debian/xpadneo-dkms.postrm.in > debian/xpadneo-dkms.postrm
+	dh_installdeb
+
+override_dh_auto_clean:
+	rm -f debian/xpadneo-dkms.preinst debian/xpadneo-dkms.postinst debian/xpadneo-dkms.prerm debian/xpadneo-dkms.postrm

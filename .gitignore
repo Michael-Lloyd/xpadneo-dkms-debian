@@ -1,0 +1,32 @@
+# Upstream source
+xpadneo/
+
+# Build outputs
+*.deb
+*.dsc
+*.changes
+*.buildinfo
+*.tar.*
+*.tar.gz
+*.tar.xz
+
+# Build directories
+build/
+debian/.debhelper/
+debian/xpadneo-dkms/
+debian/files
+debian/*.substvars
+debian/*.log
+debian/debhelper-build-stamp
+
+# Generated maintainer scripts
+debian/xpadneo-dkms.preinst
+debian/xpadneo-dkms.postinst
+debian/xpadneo-dkms.prerm
+debian/xpadneo-dkms.postrm
+
+# Editor files
+*~
+.*.swp
+.*.swo
+*.bak
