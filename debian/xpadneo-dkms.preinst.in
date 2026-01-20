@@ -6,7 +6,7 @@ PACKAGE_VERSION=@VERSION@
 
 case "$1" in
 	install|upgrade)
-		if [ -x /usr/sbin/dkms ]; then
+		if command -v dkms > /dev/null; then
 			for old_version in $(dkms status -m ${PACKAGE_NAME} 2>/dev/null | cut -d',' -f2 | cut -d':' -f1 | tr -d ' ' | sort -u); do
 				if [ -n "$old_version" ] && [ "$old_version" != "${PACKAGE_VERSION}" ]; then
 					dkms remove -m ${PACKAGE_NAME} -v ${old_version} --all 2>/dev/null || true

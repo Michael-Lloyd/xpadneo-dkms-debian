@@ -9,8 +9,8 @@ case "$1" in
 		rm -f /lib/modules/*/kernel/drivers/hid/${PACKAGE_NAME}.ko* 2>/dev/null || true
 		rm -f /lib/modules/*/extra/${PACKAGE_NAME}.ko* 2>/dev/null || true
 		rm -f /lib/modules/*/updates/dkms/${PACKAGE_NAME}.ko* 2>/dev/null || true
-		if [ -x /sbin/depmod ]; then
-			/sbin/depmod -a 2>/dev/null || true
+		if command -v depmod > /dev/null; then
+			depmod -a 2>/dev/null || true
 		fi
 		;;
 
