@@ -34,7 +34,13 @@ echo "Cleaning previous build..."
 debian/rules clean
 
 echo "Building package..."
-dpkg-buildpackage -sa
+dpkg-buildpackage -us -uc -sa
+
+# Sign the package
+cd ..
+echo ""
+echo "Signing package..."
+debsign ${PACKAGE_NAME}_${UPSTREAM_VERSION}-1_*.changes
 
 cd ..
 echo ""
