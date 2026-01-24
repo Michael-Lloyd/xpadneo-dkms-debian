@@ -17,7 +17,7 @@ Suggests: xserver-xorg-input-joystick
 Provides: xpadneo-modules
 Description: Advanced Linux driver for Xbox wireless controllers
  This driver supports Xbox wireless controllers via bluetooth, including
- Xbox One, Xbox Series X/S, and Xbox Elite controllers. It provides force
+ Xbox One, Xbox Series X|S, and Xbox Elite controllers. It provides force
  feedback, rumble, and other advanced features.
  .
  This package uses DKMS to automatically build the hid-xpadneo kernel module.
