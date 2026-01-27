@@ -11,8 +11,8 @@ Rules-Requires-Root: no
 
 Package: xpadneo-dkms
 Architecture: all
-Depends: ${misc:Depends}, dkms (>= 2.1.0.0)
-Recommends: bluez (>= 5.48), linux-headers-generic | linux-headers
+Depends: ${misc:Depends}, dkms (>= 2.1.0.0), linux-headers-generic
+Recommends: bluez (>= 5.48)
 Suggests: xserver-xorg-input-joystick
 Provides: xpadneo-modules
 Description: Advanced Linux driver for Xbox wireless controllers

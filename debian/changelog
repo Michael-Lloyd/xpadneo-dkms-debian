@@ -1,3 +1,9 @@
+xpadneo-dkms (0.9.8-2) unstable; urgency=medium
+
+  * Move linux-headers-generic from Recommends to Depends.
+
+ -- Michael Lloyd <michael@micl.dev>  Tue, 27 Jan 2026 12:00:00 +1100
+
 xpadneo-dkms (0.9.8-1) unstable; urgency=medium
 
   * Initial release. (Closes: #1125989)
