@@ -47,7 +47,8 @@ cp -r debian "${BUILD_DIR}/" || exit 1
 # Build package with sbuild
 cd "${BUILD_DIR}" || exit 1
 DEB_RELEASE=$(dpkg-parsechangelog --show-field Version | sed 's/.*-//')
-sbuild -d "${DIST}" --no-clean-source || exit 1
+# sbuild -d "${DIST}" --no-clean-source --source || exit 1
+sbuild -d "${DIST}" --no-clean-source --source --force-orig-source || exit 1
 
 # Sign the package
 cd ..
