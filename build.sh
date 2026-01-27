@@ -46,11 +46,12 @@ cp -r debian "${BUILD_DIR}/" || exit 1
 
 # Build package with sbuild
 cd "${BUILD_DIR}" || exit 1
+DEB_RELEASE=$(dpkg-parsechangelog --show-field Version | sed 's/.*-//')
 sbuild -d "${DIST}" --no-clean-source || exit 1
 
 # Sign the package
 cd ..
-debsign ${PACKAGE_NAME}_${UPSTREAM_VERSION}-1_*.changes || exit 1
+debsign ${PACKAGE_NAME}_${UPSTREAM_VERSION}-${DEB_RELEASE}_*.changes || exit 1
 
 cd ..
 echo ""
