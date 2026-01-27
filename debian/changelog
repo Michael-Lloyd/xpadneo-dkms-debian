@@ -1,5 +1,6 @@
 xpadneo-dkms (0.9.8-2) unstable; urgency=medium
 
+  * Add autopkgtests to verify dkms module functionality.
   * Move linux-headers-generic from Recommends to Depends.
   * Add README.Debian to provide Debian-specific information.
 

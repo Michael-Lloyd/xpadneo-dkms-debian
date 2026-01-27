@@ -2,9 +2,9 @@
 
 set -e
 
-STATUS_OUTPUT=$(dkms status xpadneo 2>&1)
+STATUS_OUTPUT=$(dkms status hid-xpadneo 2>&1)
 
-echo "dkms status xpadneo output:"
+echo "dkms status hid-xpadneo output:"
 echo "$STATUS_OUTPUT"
 
 if echo "$STATUS_OUTPUT" | grep -q "installed"; then
