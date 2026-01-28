@@ -1,14 +1,8 @@
-xpadneo-dkms (0.9.8-3) unstable; urgency=medium
+xpadneo-dkms (0.9.8-2) UNRELEASED; urgency=medium
 
   * Update VCS links to point to Salsa.
-
- -- Michael Lloyd <michael@micl.dev>  Wed, 28 Jan 2026 12:00:00 +1100
-
-xpadneo-dkms (0.9.8-2) unstable; urgency=medium
-
   * Add autopkgtests to verify dkms module functionality.
   * Move linux-headers-generic from Recommends to Depends.
-  * Add README.Debian to provide Debian-specific information.
 
  -- Michael Lloyd <michael@micl.dev>  Tue, 27 Jan 2026 12:00:00 +1100
 
